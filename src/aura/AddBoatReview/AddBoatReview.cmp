@@ -1,0 +1,39 @@
+<!--
+ - Created by mmilo on 8/30/2018.
+ -->
+
+<aura:component description="AddBoatReview" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="boat" type="Boat__c" access="global"/>
+    <aura:attribute name="boatReview" type="BoatReview__c" access="public"/>
+    <aura:attribute name="boatReviewRecord" type="Object" access="public"/>
+    <aura:attribute name="recordError" type="String" access="private"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <aura:registerEvent name="BoatReviewAdded" type="c:BoatReviewAdded"/>
+
+    <force:recordData aura:id="service"
+                      targetFields="{!v.boatReview}"
+                      targetRecord="{!v.boatReviewRecord}"
+                      fields="Id, Name, Comment__c, Boat__c,Rating__c"
+                      targetError="{!v.recordError}"
+                      recordUpdated="{!c.onRecordUpdated}"
+    />
+
+    <lightning:layout multipleRows="true" class="slds-grid_horizontal-center">
+        <lightning:layoutItem size="12" padding="around-small">
+            <lightning:input name="title" label="Title" value="{!v.boatReview.Name}"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="12" padding="around-small">
+            <label class="slds-form-element__label" for="input-id-01">Description</label>
+            <lightning:inputRichText value="{!v.boatReview.Comment__c}" disabledCategories="FORMAT_FONT"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="12" class="slds-align--absolute-center">
+            <label class="slds-form-element__label" for="input-id-01">Rating</label>
+            <c:FiveStarRating readonly="false" value="{!v.boatReview.Rating__c}" />
+        </lightning:layoutItem>
+        <lightning:layoutItem size="12" padding="around-small">
+            <lightning:button variant="brand" onclick="{!c.onSave}" label="Submit" iconName="utility:save"/>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>

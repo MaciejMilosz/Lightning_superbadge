@@ -1,0 +1,32 @@
+<!--
+ - Created by mmilo on 8/29/2018.
+ -->
+<aura:component description="BoatSearchForm" controller="BoatSearchFormController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >>
+    <aura:registerEvent name="formsubmit" type="c:FormSubmit"/>
+
+    <aura:attribute name="options" type="BoatType__c[]" />
+    <aura:attribute name="selectedValue" type="String" default=""/>
+    <aura:attribute name='showNewButton' type='Boolean' default='false'/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.loadOptions}" />
+
+    <aura:method name="checkShowNewButton" action="{!c.loadButton}" />
+    <aura:method name="loadBoatTypes" action="{!c.loadOptions}" />
+
+    <lightning:layout horizontalAlign="center">
+        <lightning:layoutItem flexibility="auto" padding="horizontal-small">
+            <lightning:select name="boatSelect" label="" aura:id="boatSelect" value="{!v.selectedValue}">
+                <option text="All Types" value=""></option>
+                <aura:iteration items="{!v.options}" var="item">
+                    <option text="{!item.Name}" value="{!item.Id}" selected="{!item.selected}"></option>
+                </aura:iteration>
+            </lightning:select>
+        </lightning:layoutItem>
+        <lightning:layoutItem flexibility="auto" padding="around-medium">
+            <lightning:button variant="brand" label="Search" onclick="{! c.onFormSubmit }" aura:id="SearchButton" />
+            <aura:if isTrue='{!v.showNewButton}'>
+                <lightning:button variant="neutral" label="New" onclick="{! c.createRecord }" aura:id="NewButton"/>
+            </aura:if>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>

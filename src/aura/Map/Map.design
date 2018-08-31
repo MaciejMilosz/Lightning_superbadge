@@ -1,0 +1,8 @@
+<!--
+ - Created by mmilo on 8/30/2018.
+ -->
+
+<design:component>
+    <design:attribute label="Width" name="width" placeholder="100%" default="100%"/>
+    <design:attribute label="Height" name="height" placeholder="200px" default="200px"/>
+</design:component>

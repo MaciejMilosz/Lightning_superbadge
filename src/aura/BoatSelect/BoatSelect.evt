@@ -1,0 +1,7 @@
+<!--
+ - Created by mmilo on 8/29/2018.
+ -->
+
+<aura:event type="COMPONENT" description="BoatSelect">
+    <aura:attribute name="boatId" type="Id"/>
+</aura:event>

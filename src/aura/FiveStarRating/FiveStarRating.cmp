@@ -1,0 +1,13 @@
+<!--
+ - Created by mmilo on 8/30/2018.
+ -->
+
+<aura:component description="FiveStarRating">
+    <ltng:require scripts="/resource/fivestar/rating.js" styles="/resource/fivestar/rating.css" afterScriptsLoaded="{!c.afterScriptsLoaded}"/>
+    <aura:attribute name="value" type="Integer" default="3"/>
+    <aura:attribute name="readonly" type="Boolean" default="false"/>
+
+    <aura:handler name="change" value="{!v.value}" action="{!c.onValueChange}" />
+
+    <ul aura:id="ratingarea" class="{!v.readonly ? 'readonly c-rating' : 'c-rating'}"></ul>
+</aura:component>
